@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBD Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>DBD Tracker</h1>
+
+        <div class="streak-container">
+            <div class="streak-box">
+                <h2>Killer Streak</h2>
+                <p id="killerStreak">0</p>
+            </div>
+            <div class="streak-box">
+                <h2>Survivor Streak</h2>
+                <p id="survivorStreak">0</p>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <select id="characterType">
+                <option value="killer">Killer</option>
+                <option value="survivor">Survivor</option>
+            </select>
+            <input type="text" id="characterName" placeholder="Nome">
+            <input type="text" id="perks" placeholder="Perks (opcional)">
+            <input type="text" id="addons" placeholder="Addons (opcional)">
+        </div>
+
+        <button id="submitWin">Registrar Vitória</button>
+        <button id="resetStreak" class="reset">Resetar Streak</button>
+
+        <h2>Histórico</h2>
+        <ul id="winLog"></ul>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div id="confirmReset" class="modal">
+        <div class="modal-content">
+            <p>Tem certeza que deseja resetar as streaks?</p>
+            <button id="confirmYes">Sim</button>
+            <button id="confirmNo">Não</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
