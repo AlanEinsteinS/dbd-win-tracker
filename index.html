@@ -5,46 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DBD Tracker</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪝</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
     <div class="container">
-        <h1>DBD Tracker</h1>
+        <button class="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+
+        <div class="logo-area">
+            <span class="logo">☠️</span>
+            <h1>DBD Win-Tracker</h1>
+        </div>
 
         <div class="streak-container">
-            <div class="streak-box">
+            <div class="streak-box killer">
                 <h2>Killer Streak</h2>
-                <p id="killerStreak">0</p>
+                <div class="streak-number">
+                    <i class="fas fa-skull streak-icon"></i>
+                    <span id="killerStreak">0</span>
+                </div>
+                <div class="streak-win-text">vitórias consecutivas</div>
             </div>
-            <div class="streak-box">
+            <div class="streak-box survivor">
                 <h2>Survivor Streak</h2>
-                <p id="survivorStreak">0</p>
+                <div class="streak-number">
+                    <i class="fas fa-running streak-icon"></i>
+                    <span id="survivorStreak">0</span>
+                </div>
+                <div class="streak-win-text">vitórias consecutivas</div>
             </div>
+        </div>
+
+        <div class="mode-selector">
+            <input type="radio" id="killer-mode" name="mode" checked>
+            <label for="killer-mode" class="killer-label">Killer</label>
+            <input type="radio" id="survivor-mode" name="mode">
+            <label for="survivor-mode" class="survivor-label">Survivor</label>
+            <div class="slider"></div>
         </div>
 
         <div class="input-section">
-            <select id="characterType">
-                <option value="killer">Killer</option>
-                <option value="survivor">Survivor</option>
-            </select>
-            <input type="text" id="characterName" placeholder="Nome">
-            <input type="text" id="perks" placeholder="Perks (opcional)">
-            <input type="text" id="addons" placeholder="Addons (opcional)">
+            <input type="text" id="characterName" placeholder="Nome do personagem">
+            <input type="text" id="perks" placeholder="Perks utilizados (opcional)">
+            <input type="text" id="addons" placeholder="Addons utilizados (opcional)">
+            <input type="text" id="map" placeholder="Mapa jogado (opcional)">
         </div>
 
-        <button id="submitWin">Registrar Vitória</button>
-        <button id="resetStreak" class="reset">Resetar Streak</button>
+        <div class="actions">
+            <button id="submitWin">
+                <i class="fas fa-trophy btn-icon"></i>
+                Registrar Vitória
+            </button>
+            <button id="submitLoss">
+                <i class="fas fa-times-circle btn-icon"></i>
+                Registrar Derrota
+            </button>
+        </div>
+        
+        <button id="resetStreak" class="reset">
+            <i class="fas fa-redo-alt"></i> Resetar Streaks
+        </button>
 
-        <h2>Histórico</h2>
-        <ul id="winLog"></ul>
+        <div class="stats-toggle">
+            Estatísticas <i class="fas fa-chevron-down icon"></i>
+        </div>
+        
+        <div class="stats-panel">
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-label">Partidas</div>
+                    <div class="stat-value" id="totalGames">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Vitórias</div>
+                    <div class="stat-value positive" id="totalWins">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Derrotas</div>
+                    <div class="stat-value negative" id="totalLosses">0</div>
+                </div>
+            </div>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-label">Taxa de Vitória</div>
+                    <div class="stat-value" id="winRate">0%</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Melhor Streak</div>
+                    <div class="stat-value" id="bestStreak">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h2>Histórico de Partidas</h2>
+            
+            <div class="log-filters">
+                <button class="log-filter active" data-filter="all">Todos</button>
+                <button class="log-filter" data-filter="killer">Killer</button>
+                <button class="log-filter" data-filter="survivor">Survivor</button>
+                <button class="log-filter" data-filter="victory">Vitórias</button>
+                <button class="log-filter" data-filter="defeat">Derrotas</button>
+            </div>
+            
+            <div class="log-container">
+                <ul id="gameLog"></ul>
+            </div>
+        </div>
     </div>
 
     <!-- Modal de Confirmação -->
     <div id="confirmReset" class="modal">
         <div class="modal-content">
-            <p>Tem certeza que deseja resetar as streaks?</p>
-            <button id="confirmYes">Sim</button>
-            <button id="confirmNo">Não</button>
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>Confirmação</h3>
+            <p>Tem certeza que deseja resetar todas as streaks e histórico?</p>
+            <div class="modal-buttons">
+                <button id="confirmYes">
+                    <i class="fas fa-check"></i> Sim
+                </button>
+                <button id="confirmNo">
+                    <i class="fas fa-times"></i> Não
+                </button>
+            </div>
         </div>
     </div>
 
