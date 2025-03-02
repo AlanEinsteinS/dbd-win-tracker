@@ -171,7 +171,6 @@ ul li:hover .tooltip {
     opacity: 1;
     transform: translateX(-50%) translateY(-5px);
 }
-
 /* Modal */
 .modal {
     display: none;
